@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import './../webPages/style.css'
+import './style.css'
 
 export default class CreatePage extends React.Component{
     url = "https://tgc-project3.herokuapp.com/"

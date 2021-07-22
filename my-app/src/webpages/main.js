@@ -1,9 +1,9 @@
 import React from "react";
-import '../webPages/style.css'
-import CreatePage from "../Create";
-import Views from "./../views.js";
-import ListingPage from "../listing.js"
-import EditPage from "../edit.js"
+import './style.css'
+import CreatePage from "./create";
+import Views from "./views.js";
+import ListingPage from "./listing.js"
+import EditPage from "./edit.js"
 
 class MainPage extends React.Component{
     state = {
@@ -20,7 +20,7 @@ class MainPage extends React.Component{
         return (
           <React.Fragment >
                     <div class="header">                      
-                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("../images/computerlogo.jpg").default}/></a> 
+                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/bicycle.jpg").default}/></a> 
                 <ul class="nav-container">
                 <li onClick={() => this.pageHandler("home")}><a class="active">Home</a></li>
                 <li onClick={() => this.pageHandler("listing")}><a class="active">Rentals</a></li>

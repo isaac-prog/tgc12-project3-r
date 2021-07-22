@@ -1,7 +1,7 @@
 import './App.css';
-import MainPage from './webPages/main.js'
+import MainPage from './webpages/main.js'
 import React from 'react';
-import './webPages/style.css'
+import './webpages/style.css'
 
 class App extends React.Component {
   render() {

@@ -1,16 +1,14 @@
 import React from "react";
-import '../webPages/style.css'
+import './style.css'
 
 class ListingPage extends React.Component{
     url = "https://tgc-project3.herokuapp.com/";
-    state = {
         state = {
             data: [],
             filterTypes: [],
             '_id': '',
             "page":"listing"
           }
-      }
 
       updateFormField = (event) => {
         this.setState({
@@ -37,13 +35,11 @@ class ListingPage extends React.Component{
         this.setState({
             'data': modifiedTasksList
         })
-        
         console.log(this.state.data)
       }
       
       async componentDidMount() {
         let response = await axios.get(this.url + "products/index");
-      
         console.log(response.data);
         let types = [];
         for(let data of response.data){
@@ -51,11 +47,11 @@ class ListingPage extends React.Component{
             types.push(data.type);
           }
         }
-      
         this.setState({
           data: response.data,
           filterTypes: types
         });
+      }
       
       deleteProduct = async (task_id) => {
         let task_index = this.state.data.findIndex(t => t._id === task_id);
@@ -74,16 +70,15 @@ class ListingPage extends React.Component{
         });
       };
       
-       render() {
+    render() {
          return (
            <React.Fragment>
              <div class="wallPaper">
-                <img class="image_center" src={require("./../images/computerCase.jpg").default}/>
+                <img class="image_center" src={require("./../images/bicycle.jpg").default}/>
              </div>
              {/* table */}
       <div id="flex-container">
       <div class="parts-directory">
-      
       <div class="flex-directory" onClick={() => this.pageHandler("CPU")}>
       <div class="flex-directory-body"><h4>{c.name}</h4>
       <div class="flex-directory-body"><h5>{c.type}</h5>
@@ -93,6 +88,7 @@ class ListingPage extends React.Component{
       </div>
       </div>
       </div>
+
           <table>
           {this.state.data.map(c => {
                return (
@@ -126,4 +122,7 @@ class ListingPage extends React.Component{
               <button onClick={{}}>Filter</button>
            </div>
           </div>
-         );
+          </React.Fragment>
+    )
+    }
+}
