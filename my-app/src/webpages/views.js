@@ -5,7 +5,7 @@ export default class DisplayPage extends React.Component {
  url = "https://tgc-project2.herokuapp.com/";
 
  state = {
-   data: [],
+   data: []
  };
 
  async componentDidMount() {
@@ -16,9 +16,14 @@ export default class DisplayPage extends React.Component {
  }
 
  render() {
-   return (
-     <React.Fragment>
-        <div>
+  return(
+    <div>
+    {this.state.data.map(c =>{
+    <React.Fragment>
+    {this.state.data.admin === true ? 
+    <button onClick={() => this.props.pageHandler("edit", c.id)}> Edit</button> : ""}
+    {this.state.data.admin === true ? <button onClick={() => this.deleteCase(c.id)}>Delete</button> : ""}
+        
        <div class="display-image">
           <img class="image_center" src={this.state.data.image}/>
           <h1>{this.state.data.name}</h1>
@@ -40,17 +45,16 @@ export default class DisplayPage extends React.Component {
                 {this.state.data.type}
 	        </React.Fragment>
         </div>
-        
     </div>
-
     <div class="comment-container">
       <div class="new-comment">
 
       </div>
       </div>
-    </div>
-    </div>
+    </div>    
      </React.Fragment>
-   );
- }
+  })
+}
+</div>
+)}
 }

@@ -47,7 +47,6 @@ updateTask = async (task_id) => {
   let response = await axios.post(this.url + "products/" + this.props.id + "/edit", newdata);
 }
   
-    
     render() {
         return (
             <React.Fragment>

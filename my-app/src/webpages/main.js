@@ -4,6 +4,8 @@ import CreatePage from "./create";
 import Views from "./views.js";
 import ListingPage from "./listing.js"
 import EditPage from "./edit.js"
+import RegisterPage from "./register.js"
+import LoginPage from "./login.js";
 
 class MainPage extends React.Component{
     state = {
@@ -20,10 +22,12 @@ class MainPage extends React.Component{
         return (
           <React.Fragment >
                     <div class="header">                      
-                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/bicycle.jpg").default}/></a> 
+                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/bikelogo.jpg").default}/>HP Bicycle Rental</a> 
                 <ul class="nav-container">
                 <li onClick={() => this.pageHandler("home")}><a class="active">Home</a></li>
                 <li onClick={() => this.pageHandler("listing")}><a class="active">Rentals</a></li>
+                <li onClick={() => this.pageHandler("login")}><a class="active">Login</a></li>
+                <li onClick={() => this.pageHandler("register")}><a class="active">Register</a></li>
                 </ul>
                 </div>
 
@@ -40,10 +44,12 @@ class MainPage extends React.Component{
             </React.Fragment> : ""
             }
       
-            {this.state.page === "Create" ? <CreatePage/> : ""}
-            {this.state.page === "" ? <Page pageHandler={this.pageHandler}/> : ""}
-            {this.state.page === "listing"? <DisplayPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
+            {this.state.page === "create" ? <CreatePage/> : ""}
+            {this.state.page === "views" ? <Views pageHandler={this.pageHandler}/> : ""}
+            {this.state.page === "listing"? <ListingPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
             {this.state.page === "edit"? <EditPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
+            {this.state.page === "login"? <LoginPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
+            {this.state.page === "register"? <RegisterPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
 
             <footer>
             ✉
