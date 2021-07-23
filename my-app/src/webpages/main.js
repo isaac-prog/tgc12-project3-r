@@ -22,7 +22,7 @@ class MainPage extends React.Component{
         return (
           <React.Fragment >
                     <div class="header">                      
-                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/bikelogo.jpg").default}/>HP Bicycle Rental</a> 
+                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/bikelogo.jpg").default}/>SG Bicycle Rental</a> 
                 <ul class="nav-container">
                 <li onClick={() => this.pageHandler("home")}><a class="active">Home</a></li>
                 <li onClick={() => this.pageHandler("listing")}><a class="active">Rentals</a></li>
@@ -38,7 +38,7 @@ class MainPage extends React.Component{
             <img class="directory-images" src={require("./../images/bicycle.jpg").default} alt="bicycle"/>
             
             <div>
-                <h2>Ah Beng Bicycle Rental</h2>
+                <h2>SG Bicycle Rental</h2>
             </div>
             </div>
             </React.Fragment> : ""

@@ -15,12 +15,8 @@ export default function UserProfile() {
             });
             setProfile(response.data)
         }
-
         fetch();
-
     }, [])
-
-  
 
     return (
         <React.Fragment>

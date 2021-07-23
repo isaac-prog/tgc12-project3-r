@@ -3,7 +3,7 @@ import axios from 'axios'
 import './style.css'
 
 export default class CreatePage extends React.Component{
-    url = "https://tgc-project3.herokuapp.com/"
+    url = "https://indigo-hedgehog-qqoz3ebj.ws-us11.gitpod.io/"
     state= {
         product:[],
         newName: "",
@@ -24,7 +24,6 @@ export default class CreatePage extends React.Component{
     async componentDidMount() {
         let response = await axios.get(this.url + "products/create");
 }
-    
     add = async (e) => {
         let newBike = {
             'name':this.state.newName,
