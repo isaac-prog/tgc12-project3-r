@@ -3,7 +3,7 @@ import axios from "axios";
 import './style.css'
 
 export default class ListingPage extends React.Component{
-    url = "https://tgc-project3.herokuapp.com/";
+    url = "https://3000-turquoise-owl-ddfr8lwt.ws-us11.gitpod.io//";
         state = {
             data: [],
             filterTypes: [],
