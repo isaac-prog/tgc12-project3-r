@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import './style.css'
+import {Link} from "react-router-dom"
 
 export default class ListingPage extends React.Component{
     url = "https://3000-turquoise-owl-ddfr8lwt.ws-us11.gitpod.io";
@@ -145,7 +146,7 @@ export default class ListingPage extends React.Component{
                 /><br/><br/>
             </div>
             </div>
-            <button onClick={() => this.props.pageHandler("create")}> Add new product</button>
+            <Link to="/create"><button type="button">Add product</button></Link>
           </React.Fragment>
           
         )
