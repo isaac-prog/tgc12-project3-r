@@ -3,12 +3,17 @@ import axios from "axios";
 import './style.css'
 
 export default class ListingPage extends React.Component{
-    url = "https://3000-turquoise-owl-ddfr8lwt.ws-us11.gitpod.io//";
+    url = "https://3000-turquoise-owl-ddfr8lwt.ws-us11.gitpod.io";
         state = {
             data: [],
             filterTypes: [],
+            filterName: "",
+            minPrice: "",
+            MaxPrice: "",
+            category:"",
+            tags:"",
             '_id': '',
-            "page":"listing"
+            "page":"products"
           }
 
       updateFormField = (event) => {
@@ -40,7 +45,7 @@ export default class ListingPage extends React.Component{
       }
       
       async componentDidMount() {
-        let response = await axios.get(this.url + "products/index");
+        let response = await axios.get(this.url + "/api/products");
         console.log(response.data);
         let types = [];
         for(let data of response.data){
@@ -73,15 +78,19 @@ export default class ListingPage extends React.Component{
       render(){
         return(
           <React.Fragment>
-            <h1>Bicycle listing</h1>
+            <h1>Products</h1>
+
+            <div id="flex-container">
+            <div class="result-container">
             <div class="parts-directory">
             {this.state.data.map(c =>{
             return(
             <div class="flex-directory" onClick={() => this.props.pageHandler("views",c.id)}>
+            <img class="individual-images" src={c.image_url} alt="individual image"/>
             <div class="flex-directory-body"><h4>{c.name}</h4>
             <div class="flex-directory-body"><h5>{c.type}</h5>
             <div class="flex-directory-body"><h5>{c.cost}</h5>
-            <img class="directory-images" src={c.image} alt="individual image"/>
+            
             </div>
             </div>
             </div>
@@ -89,6 +98,54 @@ export default class ListingPage extends React.Component{
             )
             })}
             </div>
+            </div>
+
+            <div class="filter-container">
+            <h3>Filters</h3>
+            <label>Product Name</label><br/>
+                <input
+                    type="text"
+                    name="productName"
+                    value={this.state.newName}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+
+              <label>Min. Price</label><br/>
+                <input
+                    type="int"
+                    name="minPrice"
+                    value={this.state.minPrice}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+
+              <label>Max. Price</label><br/>
+                <input
+                    type="text"
+                    name="maxPrice"
+                    value={this.state.MaxPrice}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+
+              <label>Category</label><br/>
+                <select
+                    name="category"
+                    value={this.state.category}
+                    onChange={this.updateFormField}
+                >
+                {this.state.data.map( (c)=><option key={c.value}  value={c.value}>{c.display}</option>)}
+                </select>
+                <br/><br/>
+
+                <label>Tags</label><br/>
+                <input
+                    type="checkbox"
+                    name="tags"
+                    value={this.state.tags}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+            </div>
+            </div>
+            <button onClick={() => this.props.pageHandler("create")}> Add new product</button>
           </React.Fragment>
           
         )

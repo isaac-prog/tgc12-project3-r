@@ -53,7 +53,7 @@ updateTask = async (task_id) => {
                 <div class="create-edit-field">
                 <h2>Edit product</h2>
             <div>
-                <label>Bicycle Name</label><br/>
+                <label>Product Name</label><br/>
                 <input
                     type="text"
                     name="editedName"

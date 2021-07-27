@@ -33,6 +33,11 @@ export default function RegisterPage() {
             <label className="form-label">Password</label>
             <input type="text" className="form-control" onChange={(e) => setPassword(e.target.value)}/>
         </div>
+
+        <div>
+            <label className="form-label">Confirm Password</label>
+            <input type="text" className="form-control" onChange={(e) => setPassword(e.target.value)}/>
+        </div>
         <button className="my-3 btn btn-primary" onClick={register}>Register</button>
     </div>
 }

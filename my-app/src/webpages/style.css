@@ -282,3 +282,8 @@
     margin-right: auto;
     width:20%
   }
+
+  .individual-images {
+    height:200px;
+    width: 200px;
+  }

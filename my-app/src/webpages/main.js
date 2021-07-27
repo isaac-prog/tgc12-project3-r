@@ -7,6 +7,8 @@ import EditPage from "./edit.js"
 import RegisterPage from "./register.js"
 import LoginPage from "./login.js";
 
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 class MainPage extends React.Component{
     state = {
         "page": "home",
@@ -20,36 +22,58 @@ class MainPage extends React.Component{
       }
     render(){
         return (
-          <React.Fragment >
-                    <div class="header">                      
-                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/bikelogo.jpg").default}/>SG Bicycle Rental</a> 
+          <React.Fragment>
+          <Router>
+                  <div class="header">                      
+                 <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./../images/organic-logo.jpg").default}/></a> 
                 <ul class="nav-container">
-                <li onClick={() => this.pageHandler("home")}><a class="active">Home</a></li>
-                <li onClick={() => this.pageHandler("listing")}><a class="active">Rentals</a></li>
-                <li onClick={() => this.pageHandler("login")}><a class="active">Login</a></li>
-                <li onClick={() => this.pageHandler("register")}><a class="active">Register</a></li>
+                <li>
+                  <Link to="/"><a class="active">Home</a></Link>
+                  </li>
+                  <li>
+                  <Link to="/products"><a class="active">Products</a></Link>
+                  </li>
+                  <li>
+                  <Link to="/login"><a class="active">Login</a></Link>
+                  </li>
+                  <li>
+                  <Link to="/register"><a class="active">Register</a></Link>
+                  </li>
                 </ul>
                 </div>
 
-            {this.state.page == "home" ?
             <React.Fragment>
             
             <div class="parts-directory">
-            <img class="directory-images" src={require("./../images/bicycle.jpg").default} alt="bicycle"/>
+            <img class="directory-images" src={require("./../images/organic.jpg").default} alt="bicycle"/>
             
-            <div>
-                <h2>SG Bicycle Rental</h2>
             </div>
-            </div>
-            </React.Fragment> : ""
-            }
-      
-            {this.state.page === "create" ? <CreatePage/> : ""}
-            {this.state.page === "views" ? <Views pageHandler={this.pageHandler}/> : ""}
-            {this.state.page === "listing"? <ListingPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
-            {this.state.page === "edit"? <EditPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
-            {this.state.page === "login"? <LoginPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
-            {this.state.page === "register"? <RegisterPage pageHandler={this.pageHandler} id={this.state.id}/> : ""}
+            </React.Fragment> 
+
+            <switch>
+            <Route exact path="/">
+          <main />
+          </Route>
+          <Route exact path="/products">
+          <ListingPage />
+          </Route>
+          <Route exact path="/login">
+          <LoginPage />
+          </Route>
+          <Route exact path="/register">
+          <RegisterPage />
+        </Route>
+        <Route exact path="/edit">
+          <EditPage />
+          </Route>
+          <Route exact path="/views">
+          <Views />
+          </Route>
+          <Route exact path="/create">
+          <CreatePage />
+          </Route>
+            </switch>
+          </Router>
 
             <footer>
             ✉

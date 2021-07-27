@@ -5,11 +5,10 @@ import UserContext from "../UserContext";
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const userContext = useContext(UserContext);
 
     async function login() {
-        let response = await axios.post(config.API_URL + "/users/login",{
+        let response = await axios.post(config.API_URL + "/users",{
             'email': email,
             'password': password
         });
@@ -20,7 +19,6 @@ export default function LoginPage() {
             'email': email,
             'password': password
         })
-
     }
 
     return <div>

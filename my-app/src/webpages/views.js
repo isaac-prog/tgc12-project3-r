@@ -9,7 +9,7 @@ export default class DisplayPage extends React.Component {
  };
 
  async componentDidMount() {
-  let response = await axios.get(this.url + "products/" + this.props.id);
+  let response = await axios.get(this.url + "api/views/" + this.props.id);
   this.setState({
     data: response.data
   })
@@ -25,7 +25,7 @@ export default class DisplayPage extends React.Component {
     {this.state.data.admin === true ? <button onClick={() => this.deleteCase(c.id)}>Delete</button> : ""}
         
        <div class="display-image">
-          <img class="image_center" src={this.state.data.image}/>
+          <img class="image_center" src={this.state.data.image_url}/>
           <h1>{this.state.data.name}</h1>
        </div>
 

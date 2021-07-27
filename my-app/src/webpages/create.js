@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './style.css'
+import { Widget } from "@uploadcare/react-widget";
 
 export default class CreatePage extends React.Component{
     url = "https://indigo-hedgehog-qqoz3ebj.ws-us11.gitpod.io/"
@@ -45,14 +46,14 @@ export default class CreatePage extends React.Component{
             'done': false
         });
     }
-    
+
     render() {
         return (
             <React.Fragment>
                 <div class="create-edit-field">
                 <h2>Create new product</h2>
             <div>
-                <label>Bicycle Name</label><br/>
+                <label>Name</label><br/>
                 <input
                     type="text"
                     name="newName"
@@ -69,12 +70,10 @@ export default class CreatePage extends React.Component{
                 /><br/><br/>
 
                 <label>Image</label><br/>
-                <input
-                    type="text"
-                    name="newImage"
-                    value={this.state.newImage}
-                    onChange={this.updateFormField}
-                /><br/><br/>
+                <p>
+            <label htmlFor='file'>Your file:</label>{' '}
+            <Widget publicKey='c26b275305df830af708' id='file' />
+                </p>
 
                 <label>Description</label><br/>
                 <textarea class="description-textbox"
