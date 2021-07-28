@@ -2,6 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import './style.css'
 import { Widget } from "@uploadcare/react-widget";
+import ProductContext from "./../pages/ProductContext";
+import ProductListing from "./../pages/ProductListing";
 
 export default class CreatePage extends React.Component{
     url = "https://indigo-hedgehog-qqoz3ebj.ws-us11.gitpod.io/"
@@ -9,11 +11,10 @@ export default class CreatePage extends React.Component{
         product:[],
         newName: "",
         newType: "",
+        newCategory:"",
         newDescription: "",
         newImage: "",
-        taskBeingEdited: 0,
-        modifiedTaskName: "",
-        newDone: false,
+        cost: 0,
     }
 
     updateFormField = (e) => {
@@ -22,6 +23,17 @@ export default class CreatePage extends React.Component{
         })
     }
 
+    onAddProduct = () => {
+        this.context.addProduct(
+            this.state.newName, 
+            this.state.newType,
+            this.state.newCategory,
+            this.state.newDescription,
+            this.state.newImage,
+            this.state.cost,
+            )
+     }
+
     async componentDidMount() {
         let response = await axios.get(this.url + "products/create");
 }
@@ -29,6 +41,7 @@ export default class CreatePage extends React.Component{
         let newBike = {
             'name':this.state.newName,
             'type':this.state.newType,
+            'category':this.state.newCategory,
             'description':this.state.newDescription,
             'image':this.state.newImage,
             'done': this.state.newDone
@@ -48,10 +61,27 @@ export default class CreatePage extends React.Component{
     }
 
     render() {
+        const context = {
+            getProducts: () => {
+              // we must arrow function because want `this` to refer to component
+              return this.state.products;
+          },
+          addProduct : (productName, cost) => {
+            let id = Math.floor(Math.random() * 10000 + 9999);
+            this.setState({
+                'products': [ ...this.state.products, {
+                    id: id,
+                    product_name : productName,
+                    cost: cost
+                }]
+            })
+         }   
+           }
         return (
             <React.Fragment>
                 <div class="create-edit-field">
                 <h2>Create new product</h2>
+                
             <div>
                 <label>Name</label><br/>
                 <input
@@ -69,6 +99,14 @@ export default class CreatePage extends React.Component{
                     onChange={this.updateFormField}
                 /><br/><br/>
 
+                    <label>Category</label><br/>
+                <input
+                    type="text"
+                    name="newCategory"
+                    value={this.state.newType}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+
                 <label>Image</label><br/>
                 <p>
             <label htmlFor='file'>Your file:</label>{' '}
@@ -80,6 +118,14 @@ export default class CreatePage extends React.Component{
                     type="text"
                     name="newDescription"
                     value={this.state.newDescription}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+
+                    <label>Cost</label><br/>
+                <input
+                    type="text"
+                    name="cost"
+                    value={this.state.newType}
                     onChange={this.updateFormField}
                 /><br/><br/>
 

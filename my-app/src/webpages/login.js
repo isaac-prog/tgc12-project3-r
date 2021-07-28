@@ -8,7 +8,7 @@ export default function LoginPage() {
     const userContext = useContext(UserContext);
 
     async function login() {
-        let response = await axios.post(config.API_URL + "/users",{
+        let response = await axios.post(config.API_URL + "api/users",{
             'email': email,
             'password': password
         });
