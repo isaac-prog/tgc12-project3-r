@@ -93,7 +93,6 @@ export default class ListingPage extends React.Component{
             <div class="flex-directory-body"><h5>{c.type}</h5>
             <div class="flex-directory-body"><h5>{c.cost}</h5>
             
-            
             </div>
             </div>
             </div>

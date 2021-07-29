@@ -30,7 +30,8 @@ export default function RegisterPage() {
           const response = await axios.get('https://3000-pink-mouse-vb214cfr.ws-us11.gitpod.io/users/register');
           setFormState(response.data)
       }
-    })
+      fetchPost()
+    },[])
 
     return (
         <React.Fragment>

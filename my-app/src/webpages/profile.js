@@ -7,7 +7,6 @@ export default function SubmittedForm() {
   let username = location.state.formState.username;
   let email = location.state.formState.email;
   
-
   return (
     <React.Fragment>
       <h1>Your profile: </h1>
@@ -16,4 +15,3 @@ export default function SubmittedForm() {
     </React.Fragment>
   );
 }
-

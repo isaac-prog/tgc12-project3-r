@@ -8,7 +8,6 @@ export default function cartPage(){
 
     async function cart(){
         let response = await axios.get(config.API_URL + "/carts/index",{
-            
         })
     }
 }
