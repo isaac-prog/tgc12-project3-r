@@ -1,7 +1,14 @@
 import React from "react";
 import axios from "axios";
+import ProductContext from "./ProductContext";
+import { BrowserRouter as Router, 
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 export default class DisplayPage extends React.Component {
+  static contextType = ProductContext;
  url = "https://tgc-project2.herokuapp.com/";
 
  state = {
@@ -9,7 +16,7 @@ export default class DisplayPage extends React.Component {
  };
 
  async componentDidMount() {
-  let response = await axios.get(this.url + "api/views/" + this.props.id);
+  let response = await axios.get(this.url + "api/products/" + this.props.id);
   this.setState({
     data: response.data
   })
@@ -52,6 +59,20 @@ export default class DisplayPage extends React.Component {
       </div>
       </div>
     </div>    
+
+    <ProductContext.Provider value={this.state.data}>
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <listing />
+                </Route>
+                <Route
+                  path="/views/:productID"
+                  render={props => <views {...props} />}
+                ></Route>
+              </Switch>
+            </Router>
+          </ProductContext.Provider>
      </React.Fragment>
   })
 }

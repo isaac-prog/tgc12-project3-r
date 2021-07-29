@@ -4,7 +4,7 @@ import './style.css'
 import {Link} from "react-router-dom"
 
 export default class ListingPage extends React.Component{
-    url = "https://3000-turquoise-owl-ddfr8lwt.ws-us11.gitpod.io";
+    url = "https://3000-pink-mouse-vb214cfr.ws-us11.gitpod.io";
         state = {
             data: [],
             filterTypes: [],
@@ -87,10 +87,12 @@ export default class ListingPage extends React.Component{
             {this.state.data.map(c =>{
             return(
             <div class="flex-directory" onClick={() => this.props.pageHandler("views",c.id)}>
+            <Link to={"/views/" + c.id}></Link>
             <img class="individual-images" src={c.image_url} alt="individual image"/>
             <div class="flex-directory-body"><h4>{c.name}</h4>
             <div class="flex-directory-body"><h5>{c.type}</h5>
             <div class="flex-directory-body"><h5>{c.cost}</h5>
+            
             
             </div>
             </div>

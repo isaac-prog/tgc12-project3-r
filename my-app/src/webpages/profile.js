@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import config from "../config";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-export default function UserProfile() {
-    const [profile, setProfile] = useState({});
+export default function SubmittedForm() {
 
-    useEffect(() => {
-        // load in the user profile using the access token
-        async function fetch() {
-            const response = await axios.get(config.API_URL + "/users/profile", {
-                'headers': {
-                    'Authorization': 'Bear ' + localStorage.getItem('accessToken')
-                }
-            });
-            setProfile(response.data)
-        }
-        fetch();
-    }, [])
+  const location = useLocation();
+  let username = location.state.formState.username;
+  let email = location.state.formState.email;
+  
 
-    return (
-        <React.Fragment>
-            <h1>User Profile</h1>
-            <ul>
-                <li>User Name: {profile.username}</li>
-                <li>Email: {profile.email}</li>
-            </ul>
-        </React.Fragment>
-    )
-
+  return (
+    <React.Fragment>
+      <h1>Your profile: </h1>
+      <p>Your name: {username}</p>
+      <p>Your email: {email}</p>
+    </React.Fragment>
+  );
 }
+

@@ -35,7 +35,7 @@ export default class CreatePage extends React.Component{
      }
 
     async componentDidMount() {
-        let response = await axios.get(this.url + "products/create");
+        let response = await axios.get(this.url + "api/products/create");
 }
     add = async (e) => {
         let newBike = {

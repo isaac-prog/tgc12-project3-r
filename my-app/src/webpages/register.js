@@ -1,43 +1,65 @@
-import React, {useState, useContext} from "react"
-import axios from "axios"
-import config from "../config";
-import UserContext from "../UserContext";
+import React, {useEffect, useState} from 'react'
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
 export default function RegisterPage() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const history = useHistory();
+    const [formState, setFormState] = useState({
+        'username': '',
+        'email':'',
+        'password':''
+    })
 
-    const userContext = useContext(UserContext);
-
-    async function register() {
-        let response = await axios.post(config.API_URL + "/users/reigster",{
-            'email': email,
-            'password': password
+    const submitForm = () => {
+        history.push("/form-submitted", {
+            formState: formState
         });
+      };
 
-        localStorage.setItem('accessToken', response.data.accessToken);
-        localStorage.setItem('refreshToken', response.data.refreshToken);
-        userContext.setUser({
-            'email': email,
-            'password': password
-        })
-
+    const updateFormField = (e) => {
+        setFormState(
+            {
+                ...formState,
+                [e.target.name]: e.target.value
+            }
+        )
     }
 
-    return <div>
-        <h1>Register</h1>
-        <div>
-            <label className="form-label">Email</label>
-            <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)}/>
-        </div>
-        <div>
-            <label className="form-label">Password</label>
-            <input type="text" className="form-control" onChange={(e) => setPassword(e.target.value)}/>
-        </div>
+    useEffect(()=>{
+        const fetchPost = async () => {
+          const response = await axios.get('https://3000-pink-mouse-vb214cfr.ws-us11.gitpod.io/users/register');
+          setFormState(response.data)
+      }
+    })
 
-        <div>
-            <label className="form-label">Confirm Password</label>
-            <input type="text" className="form-control" onChange={(e) => setPassword(e.target.value)}/>
-        </div>
-        <button className="my-3 btn btn-primary" onClick={register}>Register</button>
-    </div>
+    return (
+        <React.Fragment>
+            <h1>Register</h1>
+            <div>
+                <div>
+                    <label>Username:</label>
+                    <input type="text" 
+                           name="username" 
+                           value={formState.username}
+                           onChange={updateFormField}/>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="text" 
+                           name="email"
+                           value={formState.email}
+                           onChange={updateFormField}/>
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input type="text" 
+                           name="password"
+                           value={formState.password}
+                           onChange={updateFormField}/>
+                </div>
+                <input type="button" onClick={submitForm}>Submit</input>
+            </div>
+        </React.Fragment>
+    )
 }
+
