@@ -3,6 +3,7 @@ import ProductContext from "./ProductContext"
 
 export default class AddProduct extends React.Component {
 
+
   static contextType = ProductContext;  // note 1
   state = {
     product_name: "",
