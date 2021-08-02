@@ -33,7 +33,7 @@ export default class Create extends React.Component {
         {this.props.children}
          <React.Fragment>
          <ProductProvider>
-         <ProductListing/>
+         {/* <ProductListing/> */}
          <AddProduct/>
          </ProductProvider>
          </React.Fragment>
