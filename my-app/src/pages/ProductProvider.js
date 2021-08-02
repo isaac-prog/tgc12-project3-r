@@ -16,7 +16,7 @@ url = 'https://3000-pink-mouse-vb214cfr.ws-us13.gitpod.io/'
     this.setState({
       data: response.data,
     });
-    
+
     render() {
         const context = {
             products: () => {
@@ -41,5 +41,4 @@ url = 'https://3000-pink-mouse-vb214cfr.ws-us13.gitpod.io/'
             {this.props.children}
         </ProductContext.Provider>
     }
-  
 }
