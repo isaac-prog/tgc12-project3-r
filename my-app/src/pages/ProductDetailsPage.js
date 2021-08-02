@@ -15,6 +15,7 @@ export default class ProductDetailsPage extends React.Component {
 
   render() {
     let product = this.context.getProductByID(this.state.productID);
+
      return (
       <React.Fragment>
         <h1>Product Details</h1>
@@ -26,5 +27,5 @@ export default class ProductDetailsPage extends React.Component {
         ) : null}
       </React.Fragment>
     );
-     }
-    }
+  }
+}

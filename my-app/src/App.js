@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import ContactUs from './pages/ContactUs';
 import Home from './pages/Home';
@@ -7,10 +8,29 @@ import PostPage from "./pages/PostPage";
 import ProductListingPage from "./pages/ProductListingPage";
 import './pages/style.css';
 import Create from "./pages/create"
+import ProductProvider from "./pages/ProductProvider";
+import ProductListing from "./pages/ProductListing";
+import AddProductForm from "./pages/AddProduct";
 
 
- export default function App() {
-    return (
+ export default class App extends React.Component{
+  url = "https://pink-mouse-vb214cfr.ws-us13.gitpod.io/";
+
+  async componentDidMount() {
+    let response = await axios.get(this.url + "products/index");
+}
+
+  render(){
+    const context = {
+      products: () => {
+          return this.state.products
+      },
+      getProductByID: productID => {
+        return this.state.products.find(p => p.id == productID);
+      }
+    };
+  
+  return (
         <React.Fragment>
           <Router>
             <div class="header">                      
@@ -37,6 +57,15 @@ import Create from "./pages/create"
             <img class="directory-images" src={require("./images/organic.jpg").default} alt="bicycle"/>
             
             </div>
+
+            <div className="App container-fluid">
+        <ProductProvider>
+            <ProductListing/>
+            <AddProductForm/>
+        </ProductProvider>
+      </div>
+
+
                 <Switch>
         <Route exact path="/">
           <Home/>
@@ -67,4 +96,5 @@ import Create from "./pages/create"
         </React.Fragment>
 
     )
+  }
 }

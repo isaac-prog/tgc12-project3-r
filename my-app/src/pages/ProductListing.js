@@ -3,11 +3,12 @@ import ProductContext from "./ProductContext";
 
 export default function ProductListing() {
   let context = useContext(ProductContext);
+  console.log(context);
   
   return (
     <React.Fragment>
       <ul>
-        {context.getProducts().map(p => (
+        {context.products.map(p => (
           <li>{p.product_name}</li>
         ))}
       </ul>

@@ -1,14 +1,16 @@
 import ProductContext from "./ProductContext";
 import React from "react";
+import axios from "axios";
 
 export default class ProductProvider extends React.Component {
+  url = "https://3000-pink-mouse-vb214cfr.ws-us13.gitpod.io/";
   state = {
-    products: [
-      { id: 1, product_name: "ACME Anvils", cost: 9.99 },
-      { id: 2, product_name: "ACME Hammer", cost: 15.5 },
-      { id: 3, product_name: "ACME Screwdriver", cost: 12.5 }
-    ]
+    products: []
   };
+
+  async componentDidMount() {
+    let response = await axios.get(this.url + "products");
+  }
 
   render = () => {
     const context = {
