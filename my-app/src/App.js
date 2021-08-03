@@ -11,25 +11,45 @@ import Create from "./pages/create"
 import ProductProvider from "./pages/ProductProvider";
 import ProductListing from "./pages/ProductListing";
 import AddProductForm from "./pages/AddProduct";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 
  export default class App extends React.Component{
   url = "https://pink-mouse-vb214cfr.ws-us13.gitpod.io/";
 
-  async componentDidMount() {
-    let response = await axios.get(this.url + "products/index");
+  state = {
+    products: []
 }
 
-  render(){
+async componentDidMount() {
+  let response = await axios.get(this.url + "api/products/");
+  console.log(response.data)
+  this.setState({
+    products: response.data
+  });
+  console.log(this.state.products)
+}
+
+render() {
     const context = {
-      products: () => {
-          return this.state.products
-      },
-      getProductByID: productID => {
-        return this.state.products.find(p => p.id == productID);
-      }
-    };
-  
+        products: () => {
+            return this.state.products;
+        },
+        addProduct: (productName, cost) => {
+            let id = Math.floor(Math.random() * 10000 + 99999);
+            this.setState({
+                'products': [...this.state.products, {
+                    'id': id,
+                    'product_name': productName,
+                    'cost': cost
+                }]
+            })
+        },
+        getProductByID: (productID) => {
+          console.log(productID)
+            return this.state.products.find( p => p.id == productID)
+        }
+    }
   return (
         <React.Fragment>
           <Router>
@@ -60,15 +80,10 @@ import AddProductForm from "./pages/AddProduct";
 
             <div className="App container-fluid">
         <ProductProvider>
-            <ProductListing/>
-            <AddProductForm/>
-        </ProductProvider>
-      </div>
-
-
-                <Switch>
+        <Switch>
         <Route exact path="/">
-          <Home/>
+       < ProductListing/>
+            <AddProductForm/>
         </Route>
         <Route exact path="/contact">
           <ContactUs/>
@@ -85,7 +100,15 @@ import AddProductForm from "./pages/AddProduct";
         <Route exact path="/create">
           <Create/>
         </Route>
+        <Route exact path="/productDetails/:id">
+          <ProductDetailsPage/>
+        </Route>
       </Switch>
+        </ProductProvider>
+      </div>
+
+
+                
 
             <footer>
             ✉

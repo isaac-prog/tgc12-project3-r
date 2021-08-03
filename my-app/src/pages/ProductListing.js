@@ -17,17 +17,6 @@ export default function ProductListing() {
             </div>
             </Link>
                 </div>)}
-            
             </div>
-        <ul>
-            {context.products().map(p => 
-            <li key={p.id}>
-               <Link to={"/productDetails/" + p.id}>
-                {p.name}
-                </Link>
-            </li>)}
-        </ul>
-
     </React.Fragment>
-
 }
