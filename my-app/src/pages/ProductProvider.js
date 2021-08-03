@@ -10,12 +10,13 @@ url = 'https://3000-pink-mouse-vb214cfr.ws-us13.gitpod.io/'
     }
 
     async componentDidMount() {
-      let response = await axios.get(this.url + "products");
+      let response = await axios.get(this.url + "api/products/");
+      console.log(response.data)
+      this.setState({
+        products: response.data
+      });
+      console.log(this.state.products)
     }
-
-    this.setState({
-      data: response.data,
-    });
 
     render() {
         const context = {
