@@ -15,7 +15,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 
  export default class App extends React.Component{
-  url = "https://pink-mouse-vb214cfr.ws-us13.gitpod.io/";
+  url = "https://3000-pink-mouse-vb214cfr.ws-us14.gitpod.io/";
 
   state = {
     products: []
@@ -35,16 +35,6 @@ render() {
         products: () => {
             return this.state.products;
         },
-        addProduct: (productName, cost) => {
-            let id = Math.floor(Math.random() * 10000 + 99999);
-            this.setState({
-                'products': [...this.state.products, {
-                    'id': id,
-                    'product_name': productName,
-                    'cost': cost
-                }]
-            })
-        },
         getProductByID: (productID) => {
           console.log(productID)
             return this.state.products.find( p => p.id == productID)
@@ -57,7 +47,7 @@ render() {
                  <a onClick={() => this.pageHandler("home")} href="#default"><img class='logo'src={require("./images/organic-logo.jpg").default}/></a> 
                 <ul class="nav-container">
                 <li>
-                  <Link to="/"><a class="active">Home</a></Link>
+                  <Link to="/"><a class="active">Products</a></Link>
                   </li>
                   <li>
                   <Link to="/contact"><a class="active">Contact</a></Link>
@@ -66,7 +56,7 @@ render() {
                   <Link to ="/posts"><a class="active">Posts</a></Link>
                   </li>
                   <li>
-                  <Link to ="/catelog"><a class="active">Products</a></Link>
+                  <Link to ="/catelog"><a class="active">---</a></Link>
                   </li>
                   <li>
                   <Link to ="/create"><a class="active">Create</a></Link>
@@ -74,7 +64,7 @@ render() {
                 </ul>
                 </div>
                 <div class="parts-directory">
-            <img class="directory-images" src={require("./images/organic.jpg").default} alt="bicycle"/>
+            <img class="directory-images" src={require("./images/organic.jpg").default} alt="picture"/>
             
             </div>
 
@@ -98,7 +88,7 @@ render() {
           <ProductListingPage/>
         </Route>
         <Route exact path="/create">
-          <Create/>
+          <AddProductForm/>
         </Route>
         <Route exact path="/productDetails/:id">
           <ProductDetailsPage/>
@@ -106,9 +96,6 @@ render() {
       </Switch>
         </ProductProvider>
       </div>
-
-
-                
 
             <footer>
             ✉

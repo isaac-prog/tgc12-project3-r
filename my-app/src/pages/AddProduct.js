@@ -1,46 +1,93 @@
-import React from "react"
-import ProductContext from "./ProductContext"
+import React from 'react'
+import axios from 'axios'
+import './style.css'
 
-export default class AddProduct extends React.Component {
-    state = {
-        product_name: "",
-        cost: 0
+export default class AddProductForm extends React.Component{
+    url = "https://3000-pink-mouse-vb214cfr.ws-us14.gitpod.io/"
+    state= {
+        product:[],
+        name: "",
+        cost: 0,
+        description: "",
+        category: "",
+        image_url: "",
     }
 
-    // the name must strictly match below
-    static contextType = ProductContext;
-
-    updateFormField = (e)=> {
+    updateFormField = (e) => {
         this.setState({
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    onAddProduct = () => {
-        this.context.addProduct(this.state.product_name, this.state.cost);
+    async componentDidMount() {
+        let response = await axios.get(this.url + "api/products");
+}
+    
+    addProducts = async (e) => {
+        let newProducts = {
+            'name':this.state.newName,
+            'cost':this.state.newCost,
+            'description':this.state.newDescription,
+            'category':this.state.newCategory,
+            'image_url':this.state.newImage_url,
+        }
+        console.log(newProducts)
+        let response = await axios.post(this.url + "api/products", newProducts);
+        let currentValues = this.state.case;
+        let modifiedValues = [...currentValues, newProducts];
+        this.setState({
+            'case': modifiedValues,
+            'newName': '',
+            'newCost':0,
+            'newDescription':'',
+            'newCategory':'',
+            'newImage_url':'',
+        });
     }
-
+    
     render() {
-        return <React.Fragment>
+        return (
+            <React.Fragment>
+                <div class="create-edit-field">
+                <h2>Create new product</h2>
             <div>
-                <label>Name:</label>
-                <input type="text" 
-                    name="product_name"
-                    value={this.state.product_name}
-                    onChange={this.updateFormField} />
-            </div>
-            <div>
-                <label>Cost:</label>
-                <input type="text"
-                    name="cost"
-                    value={this.state.cost}
+                <label>Name</label><br/>
+                <input
+                    type="text"
+                    name="newName"
+                    value={this.state.newName}
                     onChange={this.updateFormField}
-                />
-            </div>
-            <button onClick={this.onAddProduct}>Add Product</button>
+                /><br/><br/>
 
+                <label>Cost</label><br/>
+                <input
+                    type="text"
+                    name="newCost"
+                    value={this.state.newCost}
+                    onChange={this.updateFormField}
+                /><br/><br/>
+                
+                <label>Description</label><br/>
+                <input
+                    type="text"
+                    name="newDescription"
+                    value={this.state.newDescription}
+                    onChange={this.updateFormField}
+                /><br/><br/>
 
-        </React.Fragment>
+                <label>Category</label><br/>
+                <input
+                    type="text"
+                    name="newCategory"
+                    value={this.state.newCategory}
+                    onChange={this.updateFormField}
+                /><br/><br/>
 
+                <button onClick={this.addCase}>Add</button>
+                </div><br/>
+                </div>
+            </React.Fragment>
+        )
     }
 }
+

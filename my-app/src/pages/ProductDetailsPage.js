@@ -1,31 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductContext from "./ProductContext";
+import {useParams} from "react-router-dom";
 import axios from "axios";
+const  url = "https://3000-pink-mouse-vb214cfr.ws-us14.gitpod.io/";
+export default function ProductDetailsPage() {
 
-export default class ProductDetailsPage extends React.Component {
-  url = "https://tgc-project2.herokuapp.com/";
-  static contextType = ProductContext; // Note 1
-  state = {
-    productID: 0,
-    product: []
-  };
+  let { id } = useParams();
+  const [product, setProduct] = useState({});
 
- async componentDidMount() {
-  let response = await axios.get(this.url + "api/products/" + this.props.id);
-  console.log(this.props.match.params);
-  let { productID } = this.props.match.id;
-  this.setState({
-    productID,
-    product: response.data
-    });
-    console.log('productid ', productID)
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    //Call API
+      const fetchProduct = async (id) => {
+        const response = await axios.get(url+'api/products/'+id);
+    setProduct(response.data);
   }
+    console.log(id)
+  fetchProduct(id)
+}, []);
 
-  render() {
-    console.log(this.state.productID);
-    let product = this.context.getProductByID(this.state.productID);
-    console.log(product);
-    console.log(1);
      return (
       <React.Fragment>
         <h1>Product Details</h1>
@@ -39,5 +32,4 @@ export default class ProductDetailsPage extends React.Component {
         ) : null}
       </React.Fragment>
     );
-  }
 }
