@@ -83,7 +83,7 @@ export default class AddProductForm extends React.Component{
                     onChange={this.updateFormField}
                 /><br/><br/>
 
-                <button onClick={this.addCase}>Add</button>
+                <button onClick={this.addProducts}>Add</button>
                 </div><br/>
                 </div>
             </React.Fragment>
